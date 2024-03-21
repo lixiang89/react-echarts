@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import ReactECharts from "echarts-for-react";
 import Card from "./Card";
+import Chart from './Chart'
 import "./App.css";
 
 const sleep = (timeout = 3000) => {
@@ -11,12 +12,19 @@ const sleep = (timeout = 3000) => {
 
 const random = (fix = 300) => Math.trunc(Math.random() * fix);
 
+const style = {
+  height: "270px",
+};
+
 const App = () => {
   const barRef = useRef();
   const [barLoading, setBarLoading] = useState(false);
 
   const lineRef = useRef();
   const [lineLoading, setLineLoading] = useState(false);
+
+  const [line2Loading, setLine2Loading] = useState(false);
+  const [lin2Data, setLine2Data] = useState([]);
 
   const pieRef = useRef();
   const [pieLoading, setPieLoading] = useState(false);
@@ -139,6 +147,62 @@ const App = () => {
     setChartOption(lineRef, initData);
     setLineLoading(false);
   };
+  const getLine2 = async () => {
+    setLine2Loading(true);
+    await sleep(2000);
+    setLine2Loading(false);
+    const data= [
+        {
+          data: [
+            random(),
+            random(),
+            random(),
+            random(),
+            random(),
+            random(),
+            random(),
+          ],
+          name: "Email",
+        },
+        {
+          data: [
+            random(),
+            random(),
+            random(),
+            random(),
+            random(),
+            random(),
+            random(),
+          ],
+          name: "Union",
+        },
+        {
+          data: [
+            random(),
+            random(),
+            random(),
+            random(),
+            random(),
+            random(),
+            random(),
+          ],
+          name: "Video",
+        },
+        {
+          data: [
+            random(),
+            random(),
+            random(),
+            random(),
+            random(),
+            random(),
+            random(),
+          ],
+          name: "Direct",
+        },
+      ]
+    setLine2Data(data)
+  };
   const getPie = async () => {
     setPieLoading(true);
     await sleep();
@@ -166,6 +230,7 @@ const App = () => {
     getPie();
     getLine();
     getBar();
+    getLine2()
   }, []);
 
   return (
@@ -326,6 +391,44 @@ const App = () => {
           ),
           []
         )}
+      </Card>
+      <Card loading={line2Loading} extra={{ reload: getLine2 }} title={"折线图-chart组件"}>
+        <Chart
+          option={{
+            tooltip: {
+              trigger: "axis",
+            },
+            grid: { top: 50 },
+            legend: {
+              icon: "circle",
+              left: -5,
+              top: 10,
+            },
+            xAxis: {
+              type: "category",
+              axisTick: false,
+            },
+            yAxis: {
+              type: "value",
+            },
+            series: [
+              {
+                type: "line",
+                symbol: "none",
+              },
+            ],
+          }}
+          handler={ (data = []) => {
+            const config = { type: 'line', symbol: 'none' }
+            return {
+              xAxis: {
+                data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+              },
+              series: data.map((d) => ({ ...d, ...config })),
+            }
+          }}
+          data={lin2Data}
+        />
       </Card>
     </div>
   );
