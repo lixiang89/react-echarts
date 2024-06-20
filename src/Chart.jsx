@@ -3,13 +3,15 @@ import ReactECharts from 'echarts-for-react'
 
 const defaultOption = {
   grid: {
-    top: 45,
+    top: 0,
     left: 0,
     right: 0,
     bottom: 25,
     containLabel: true,
   },
-  tooltip: { appendToBody: true },
+  // tooltip: { appendToBody: true },
+  // appendToBody在某些情况有样式抽搐问题，5.5.0可使用appendTo指定dom元素，或使用confine:true
+  tooltip: { appendTo: element=>element },
   legend: {
     icon: 'circle',
   },
@@ -47,14 +49,14 @@ const Chart = ({ option, handler, data }) => {
 
   useEffect(() => {
     const chart = chartRef.current?.getEchartsInstance()
-    chart?.setOption(defaultOption)
+    chart?.setOption(option)
   }, [])
 
   useEffect(() => {
     setOption(data)
   }, [data])
 
-  return <ReactECharts ref={chartRef} option={option} />
+  return <ReactECharts ref={chartRef} option={defaultOption} />
 }
 
 export default Chart

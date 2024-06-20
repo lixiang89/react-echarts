@@ -12,10 +12,6 @@ const sleep = (timeout = 3000) => {
 
 const random = (fix = 300) => Math.trunc(Math.random() * fix);
 
-const style = {
-  height: "270px",
-};
-
 const App = () => {
   const barRef = useRef();
   const [barLoading, setBarLoading] = useState(false);
@@ -234,202 +230,166 @@ const App = () => {
   }, []);
 
   return (
-    <div className="board">
-      <Card
-        extra={{
-          reload: getBar,
-        }}
-        title={"柱状图"}
-        loading={barLoading}
-      >
-        <ReactECharts
-          ref={barRef}
-          option={{
-            tooltip: {
-              trigger: "axis",
-              axisPointer: {
-                type: "shadow",
-              },
-            },
-            xAxis: {
-              type: "category",
-              axisTick: false,
-              axisLabel: {
-                interval: 0,
-              },
-            },
-            yAxis: {
-              type: "value",
-            },
-            series: [],
+    <div className="container">
+      <header>标题吞吞吐吐吞吞吐吐吞吞吐吐吞吞吐吐吞吞吐吐吞吞吐吐吞吞吐吐他</header>
+      <div className="board">
+        <Card
+          extra={{
+            reload: getBar,
           }}
-        />
-      </Card>
-      <Card loading={lineLoading} extra={{ reload: getLine }} title={"折线图"}>
-        <ReactECharts
-          ref={lineRef}
-          option={{
-            tooltip: {
-              trigger: "axis",
-            },
-            grid: { top: 50 },
-            legend: {
-              icon: "circle",
-              left: -5,
-              top: 10,
-            },
-            xAxis: {
-              type: "category",
-              axisTick: false,
-            },
-            yAxis: {
-              type: "value",
-            },
-            series: [
-              {
-                type: "line",
-                symbol: "none",
+          title={"柱状图"}
+          loading={barLoading}
+        >
+          <ReactECharts
+            ref={barRef}
+            option={{
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "shadow",
+                },
               },
-            ],
-          }}
-        />
-      </Card>
-      <Card
-        className="pie"
-        extra={{
-          reload: getPie,
-        }}
-        title={"饼图"}
-        loading={pieLoading}
-      >
-        <ReactECharts
-          ref={pieRef}
-          option={{
-            title: {
-              text: "55",
-              subtext: "内标题",
-              left: "center",
-              top: "30%",
-              textStyle: {
-                fontSize: 20,
-              },
-              subtextStyle: {
-                fontSize: 14,
-                color: "#929AA6",
-              },
-            },
-            tooltip: {
-              // trigger: 'item',
-            },
-            legend: {
-              icon: "circle",
-              bottom: 20,
-            },
-            series: [
-              {
-                // name: 'Access From',
-                type: "pie",
-                radius: ["50%", "70%"],
-                center: ["50%", "40%"],
-                avoidLabelOverlap: false,
-                label: {
-                  show: false,
-                  position: "inside",
-                },
-                emphasis: {
-                  // disabled: true,
-                  // label: {
-                  //   show: true,
-                  //   fontSize: 14,
-                  //   fontWeight: 'bold',
-                  // },
-                },
-                labelLine: {
-                  show: false,
-                },
-                data: [],
-              },
-            ],
-          }}
-        />
-      </Card>
-      <Card className="bar-col" title="柱状图-横">
-        {useMemo(
-          () => (
-            <ReactECharts
-              option={{
-                grid: { right: 10 },
-                tooltip: {
-                  trigger: "axis",
-                  axisPointer: {
-                    type: "shadow",
-                  },
-                },
-                xAxis: {
-                  type: "value",
-                  boundaryGap: [0, 0.01],
-                },
-                yAxis: {
-                  type: "category",
-                  data: ["壹", "贰", "叁"],
-                  axisTick: false,
-                },
-                series: [
-                  {
-                    name: "2011",
-                    type: "bar",
-                    data: [random(), random(), random()],
-                  },
-                  {
-                    name: "2012",
-                    type: "bar",
-                    data: [random(), random(), random()],
-                  },
-                ],
-              }}
-            />
-          ),
-          []
-        )}
-      </Card>
-      <Card loading={line2Loading} extra={{ reload: getLine2 }} title={"折线图-chart组件"}>
-        <Chart
-          option={{
-            tooltip: {
-              trigger: "axis",
-            },
-            grid: { top: 50 },
-            legend: {
-              icon: "circle",
-              left: -5,
-              top: 10,
-            },
-            xAxis: {
-              type: "category",
-              axisTick: false,
-            },
-            yAxis: {
-              type: "value",
-            },
-            series: [
-              {
-                type: "line",
-                symbol: "none",
-              },
-            ],
-          }}
-          handler={ (data = []) => {
-            const config = { type: 'line', symbol: 'none' }
-            return {
               xAxis: {
-                data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                type: "category",
+                axisTick: false,
+                axisLabel: {
+                  interval: 0,
+                },
               },
-              series: data.map((d) => ({ ...d, ...config })),
-            }
+              yAxis: {
+                type: "value",
+              },
+              series: [],
+            }}
+          />
+        </Card>
+        <Card loading={lineLoading} extra={{ reload: getLine }} title={"折线图"}>
+          <ReactECharts
+            ref={lineRef}
+            option={{
+              tooltip: {
+                trigger: "axis",
+              },
+              grid: { top: 50 },
+              legend: {
+                icon: "circle",
+                left: -5,
+                top: 10,
+              },
+              xAxis: {
+                type: "category",
+                axisTick: false,
+              },
+              yAxis: {
+                type: "value",
+              },
+              series: [
+                {
+                  type: "line",
+                  symbol: "none",
+                },
+              ],
+            }}
+          />
+        </Card>
+        <Card
+          className="pie"
+          extra={{
+            reload: getPie,
           }}
-          data={lin2Data}
-        />
-      </Card>
+          title={"饼图"}
+          loading={pieLoading}
+        >
+          <ReactECharts
+            ref={pieRef}
+            option={{
+              title: {
+                text: "55",
+                subtext: "内标题",
+                left: "center",
+                top: "30%",
+                textStyle: {
+                  fontSize: 20,
+                },
+                subtextStyle: {
+                  fontSize: 14,
+                  color: "#929AA6",
+                },
+              },
+              tooltip: {
+                // trigger: 'item',
+              },
+              legend: {
+                icon: "circle",
+                bottom: 20,
+              },
+              series: [
+                {
+                  // name: 'Access From',
+                  type: "pie",
+                  radius: ["50%", "70%"],
+                  center: ["50%", "40%"],
+                  avoidLabelOverlap: false,
+                  label: {
+                    show: false,
+                    position: "inside",
+                  },
+                  emphasis: {
+                    // disabled: true,
+                    // label: {
+                    //   show: true,
+                    //   fontSize: 14,
+                    //   fontWeight: 'bold',
+                    // },
+                  },
+                  labelLine: {
+                    show: false,
+                  },
+                  data: [],
+                },
+              ],
+            }}
+          />
+        </Card>
+        <Card loading={line2Loading} extra={{ reload: getLine2 }} title={"折线图-chart组件"}>
+          <Chart
+            option={{
+              tooltip: {
+                trigger: "axis",
+              },
+              grid: { top: 50 },
+              legend: {
+                icon: "circle",
+                left: -5,
+                top: 10,
+              },
+              xAxis: {
+                type: "category",
+                axisTick: false,
+              },
+              yAxis: {
+                type: "value",
+              },
+              series: [
+                {
+                  type: "line",
+                  symbol: "none",
+                },
+              ],
+            }}
+            handler={ (data = []) => {
+              const config = { type: 'line', symbol: 'none' }
+              return {
+                xAxis: {
+                  data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                },
+                series: data.map((d) => ({ ...d, ...config })),
+              }
+            }}
+            data={lin2Data}
+          />
+        </Card>
+      </div>
     </div>
   );
 };
